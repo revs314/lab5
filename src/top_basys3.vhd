@@ -66,7 +66,7 @@ architecture top_basys3_arch of top_basys3 is
     
         
     component clock_divider
-        generic (k_DIV : natural := 50000000);
+        generic (k_DIV : natural := 100000);
         Port (
             i_clk    : in std_logic;
 			i_reset  : in std_logic;
@@ -125,13 +125,14 @@ architecture top_basys3_arch of top_basys3 is
     signal digit_data : std_logic_vector(3 downto 0);
     signal seg_data : std_logic_vector(6 downto 0);
     signal an_data : std_logic_vector(3 downto 0);
+    signal op_latched : std_logic_vector(2 downto 0) := "000";
+    signal result_latched : std_logic_vector(7 downto 0);
+    signal btnC_sync, btnC_prev : std_logic := '0';
+    signal btnC_pulse : std_logic;
 
 begin
 	-- PORT MAPS ----------------------------------------
     clkdiv: clock_divider
-    generic map(
-        k_DIV => 100000
-    )
         port map (
             i_clk => clk,
             -- connects input to clock
@@ -140,6 +141,16 @@ begin
             o_clk => slow_clk
             -- slows down everything
         );
+        
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            btnC_prev <= btnC_sync;
+            btnC_sync <= btnC;
+        end if;
+    end process;
+    
+    btnC_pulse <= btnC_sync and (not btnC_prev);
     
     fsm: controller_fsm
         port map (
@@ -151,6 +162,7 @@ begin
             -- center button advances state
             -- ouptut is 1-hot state
         );    
+        
     alu1: ALU
         port map (
             i_A => c_A,
@@ -161,9 +173,36 @@ begin
             o_flags => w_flags
         );
         
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            if btnU = '1' then
+                c_A <= (others => '0');
+                c_B <= (others => '0');
+                result_latched <= (others => '0');
+            else
+                case w_cycle is
+                    when "0010" =>
+                        c_A <= sw;
+                        -- load A
+                    when "0100" =>
+                        c_B <= sw;
+                        
+                        -- load B
+                    when "1000" =>
+                        result_latched <= w_result;
+                        
+                    when others =>
+                        null;
+                end case;
+                
+            end if;
+        end if;
+    end process;
+        
     decimal_conversion: twos_comp
     port map(
-        i_bin => w_result,
+        i_bin => result_latched,
         o_sign => sign,
         o_hund => hundred,
         o_tens => tens,
@@ -175,7 +214,7 @@ begin
     port map(
         i_clk => slow_clk,
         i_reset => btnU,
-        i_D3 => "1111", -- leftmost digit
+        i_D3 => "0000", -- leftmost digit
         i_D2 => hundred,
         i_D1 => tens,
         i_D0 => ones,
@@ -184,54 +223,29 @@ begin
     );
     
     decoder: sevenseg_decoder
-    port map(
-        i_Hex => digit_data,
-        o_seg => seg_data
-    );
+        port map(
+            i_Hex => digit_data,
+            o_seg => seg_data
+        );
     -- converts 0101 into segments to rep 5
-    
-    process(clk)
-    begin
-        if rising_edge(clk) then
-            if btnU = '1' then
-                c_A <= (others => '0');
-                c_B <= (others => '0');
-            else
-                case w_cycle is
-                    when "0010" =>
-                        c_A <= sw;
-                        -- load A
-                    when "0100" =>
-                        c_B <= sw;
-                        -- load B
-                    when others =>
-                        null;
-                end case;
-                
-            end if;
-        end if;
-    end process;
-    
-    -- outputs
-    led(3 downto 0) <= w_cycle;
-    led(15 downto 12) <= w_flags;
-    led(11 downto 4) <= (others => '0');
-    
-    
     
     process(sign, an_data, seg_data)
     begin
-        -- if negative and leftmost digit
         if sign = '1' and an_data = "0111" then
-            seg <= "0111111"; -- minus
+            seg <= "0111111";
         else
             seg <= seg_data;
         end if;
         
         an <= an_data;
-        
-        
     end process;
+    
+    
+    -- outputs
+    led(3 downto 0) <= w_cycle;
+    led(15 downto 12) <= w_flags;
+    led(11 downto 4) <= (others => '0');
+
             
 	
 	

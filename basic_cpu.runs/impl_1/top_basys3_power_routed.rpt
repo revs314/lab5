@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date             : Wed May  6 21:24:51 2026
+| Date             : Wed May  6 22:36:24 2026
 | Host             : C28-2TK41601DB running 64-bit major release  (build 9200)
 | Command          : report_power -file top_basys3_power_routed.rpt -pb top_basys3_power_summary_routed.pb -rpx top_basys3_power_routed.rpx
 | Design           : top_basys3
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.113        |
+| Total On-Chip Power (W)  | 0.109        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.041        |
+| Dynamic (W)              | 0.038        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 5.0          |
-| Max Ambient (C)          | 84.4         |
-| Junction Temperature (C) | 25.6         |
+| Max Ambient (C)          | 84.5         |
+| Junction Temperature (C) | 25.5         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -53,15 +53,15 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |     0.004 |      613 |       --- |             --- |
-|   LUT as Logic |     0.003 |      351 |     20800 |            1.69 |
+| Slice Logic    |     0.002 |      634 |       --- |             --- |
+|   LUT as Logic |     0.002 |      368 |     20800 |            1.77 |
 |   CARRY4       |    <0.001 |       79 |      8150 |            0.97 |
-|   Register     |    <0.001 |       57 |     41600 |            0.14 |
+|   Register     |    <0.001 |       65 |     41600 |            0.16 |
 |   Others       |     0.000 |        8 |       --- |             --- |
-| Signals        |     0.003 |      485 |       --- |             --- |
+| Signals        |     0.002 |      496 |       --- |             --- |
 | I/O            |     0.033 |       39 |       106 |           36.79 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.113 |          |           |                 |
+| Total          |     0.109 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -71,7 +71,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.018 |       0.008 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.015 |       0.005 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.014 |       0.001 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.010 |       0.009 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -140,8 +140,8 @@ Table of Contents
 +------------+-----------+
 | Name       | Power (W) |
 +------------+-----------+
-| top_basys3 |     0.041 |
-|   display  |     0.007 |
+| top_basys3 |     0.038 |
+|   display  |     0.004 |
 +------------+-----------+
 
 
