@@ -129,6 +129,7 @@ architecture top_basys3_arch of top_basys3 is
     signal result_latched : std_logic_vector(7 downto 0);
     signal btnC_sync, btnC_prev : std_logic := '0';
     signal btnC_pulse : std_logic;
+    signal A_latched, B_latched : std_logic_vector(7 downto 0);
 
 begin
 	-- PORT MAPS ----------------------------------------
@@ -156,7 +157,7 @@ begin
         port map (
             i_clk => clk,
             i_reset => btnU,
-            i_adv => btnC,
+            i_adv => btnC_pulse,
             o_cycle => w_cycle
             -- reset button resets FSM
             -- center button advances state
@@ -165,8 +166,8 @@ begin
         
     alu1: ALU
         port map (
-            i_A => c_A,
-            i_B => c_B,
+            i_A => A_latched,
+            i_B => B_latched,
             i_op => sw(2 downto 0),
             -- lower 3 switches are the opcode
             o_result => w_result,
@@ -184,9 +185,11 @@ begin
                 case w_cycle is
                     when "0010" =>
                         c_A <= sw;
+                        A_latched <= sw;
                         -- load A
                     when "0100" =>
                         c_B <= sw;
+                        B_latched <= sw;
                         
                         -- load B
                     when "1000" =>
