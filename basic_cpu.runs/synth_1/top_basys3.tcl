@@ -76,8 +76,11 @@ OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
   C:/Users/C28Reva.Kalbhor/ece281/lab5/src/ALU.vhd
+  C:/Users/C28Reva.Kalbhor/ece281/lab5/src/TDM4.vhd
   C:/Users/C28Reva.Kalbhor/ece281/lab5/src/clock_divider.vhd
   C:/Users/C28Reva.Kalbhor/ece281/lab5/src/controller_fsm.vhd
+  C:/Users/C28Reva.Kalbhor/ece281/lab2/src/sevenseg_decoder.vhd
+  C:/Users/C28Reva.Kalbhor/ece281/lab5/src/twoscomp_decimal.vhd
   C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd
 }
 OPTRACE "Adding files" END { }
@@ -93,6 +96,8 @@ read_xdc C:/Users/C28Reva.Kalbhor/ece281/lab5/src/Basys3_Master.xdc
 set_property used_in_implementation false [get_files C:/Users/C28Reva.Kalbhor/ece281/lab5/src/Basys3_Master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental C:/Users/C28Reva.Kalbhor/ece281/lab5/basic_cpu.srcs/utils_1/imports/synth_1/top_basys3.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

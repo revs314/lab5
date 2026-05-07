@@ -74,6 +74,37 @@ architecture top_basys3_arch of top_basys3 is
         );
     end component;
     
+    component twos_comp
+        port (
+            i_bin : in std_logic_vector(7 downto 0);
+            o_sign : out std_logic;
+            o_hund : out std_logic_vector(3 downto 0);
+            o_tens : out std_logic_vector(3 downto 0);
+            o_ones : out std_logic_vector(3 downto 0)
+        );
+    end component;
+    
+    component TDM4
+        generic ( constant k_WIDTH : natural := 4);
+        Port (
+           i_clk		: in  STD_LOGIC;
+           i_reset		: in  STD_LOGIC; -- asynchronous
+           i_D3 		: in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
+		   i_D2 		: in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
+		   i_D1 		: in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
+		   i_D0 		: in  STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
+		   o_data		: out STD_LOGIC_VECTOR (k_WIDTH - 1 downto 0);
+		   o_sel		: out STD_LOGIC_VECTOR (3 downto 0)	-- selected data line (one-cold)
+	    );
+    end component;
+    
+    component sevenseg_decoder
+        port (
+            i_Hex : in STD_LOGIC_VECTOR (3 downto 0); -- INPUT that is 4 bits HEX -> takes in values 0-F
+           o_seg : out STD_LOGIC_VECTOR (6 downto 0) -- OUTPUT that is 7 bits -> controls Sa - Sg
+        );
+    end component;
+    
     signal c_A, c_B : std_logic_vector(7 downto 0) := (others => '0');
     signal w_cycle : std_logic_vector(3 downto 0);
     -- FSM output
@@ -91,10 +122,16 @@ architecture top_basys3_arch of top_basys3 is
     signal tens : std_logic_vector(3 downto 0);
     -- 4 bits to rep ones digit
     signal ones : std_logic_vector(3 downto 0);
+    signal digit_data : std_logic_vector(3 downto 0);
+    signal seg_data : std_logic_vector(6 downto 0);
+    signal an_data : std_logic_vector(3 downto 0);
 
 begin
 	-- PORT MAPS ----------------------------------------
     clkdiv: clock_divider
+    generic map(
+        k_DIV => 100000
+    )
         port map (
             i_clk => clk,
             -- connects input to clock
@@ -123,6 +160,35 @@ begin
             o_result => w_result,
             o_flags => w_flags
         );
+        
+    decimal_conversion: twos_comp
+    port map(
+        i_bin => w_result,
+        o_sign => sign,
+        o_hund => hundred,
+        o_tens => tens,
+        o_ones => ones
+    );
+    
+    display: TDM4
+    generic map(k_WIDTH => 4)
+    port map(
+        i_clk => slow_clk,
+        i_reset => btnU,
+        i_D3 => "1111", -- leftmost digit
+        i_D2 => hundred,
+        i_D1 => tens,
+        i_D0 => ones,
+        o_data => digit_data,
+        o_sel => an_data
+    );
+    
+    decoder: sevenseg_decoder
+    port map(
+        i_Hex => digit_data,
+        o_seg => seg_data
+    );
+    -- converts 0101 into segments to rep 5
     
     process(clk)
     begin
@@ -151,21 +217,21 @@ begin
     led(15 downto 12) <= w_flags;
     led(11 downto 4) <= (others => '0');
     
-    process(w_result)
+    
+    
+    process(sign, an_data, seg_data)
     begin
-        if w_result(7) = '1' then
-            sign <= '1';
+        -- if negative and leftmost digit
+        if sign = '1' and an_data = "0111" then
+            seg <= "0111111"; -- minus
         else
-            sign <= '0';
+            seg <= seg_data;
         end if;
         
-        hundred <= (others => '0');
-        tens <= std_logic_vector(unsigned(w_result) / 10);
-        ones <= std_logic_vector(unsigned(w_result) mod 10);
+        an <= an_data;
+        
+        
     end process;
-    
-    seg <= (others => '0');
-    an <= "1111";
             
 	
 	

@@ -50,7 +50,6 @@ architecture Behavioral of ALU is
     signal c_A : signed(8 downto 0);
     signal c_B : signed(8 downto 0);
     signal temp_result : signed(8 downto 0);
-    signal c_result : signed(7 downto 0);
 
 begin
     
@@ -79,7 +78,6 @@ begin
             when others => -- RESET
                 temp := (others => '0');
         end case;
-      c_result <= temp(7 downto 0);
       o_result <= std_logic_vector(temp(7 downto 0));
       -- takes lower 8 bits of result and converts it to std_logic_vector
       
