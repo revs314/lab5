@@ -24,7 +24,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -61,7 +61,7 @@ begin
     process(c_A, c_B, i_op)
     variable temp : signed(8 downto 0);
     -- temp holds result before final output
-    variable flags : std_logic_vector(3 downto 0)
+    variable flags : std_logic_vector(3 downto 0);
     -- flags
     begin
     temp := (others => '0');
@@ -69,24 +69,29 @@ begin
     -- reset everything at start of operation
         case i_op is
             when "000" => -- ADD
-                temp := a_s + b_s;
+                temp := c_A + c_B;
             when "001" => -- SUBTRACT
-                temp := a_s - b_s;
+                temp := c_A - c_B;
             when "010" => -- AND
-                temp(7 downto 0) := a_s(7 downto 0) and b_s(7 downto 0);
+                temp(7 downto 0) := c_A(7 downto 0) and c_B(7 downto 0);
             when "011" => -- OR
-                temp(7 downto 0) := a_s(7 downto 0) or b_s(7 downto 0);
+                temp(7 downto 0) := c_A(7 downto 0) or c_B(7 downto 0);
             when others => -- RESET
                 temp := (others => '0');
         end case;
-      c_result <+ temp(7 downto 0);
-      o_result <= std_logic_vector(c_result);
+      c_result <= temp(7 downto 0);
+      o_result <= std_logic_vector(temp(7 downto 0));
       -- takes lower 8 bits of result and converts it to std_logic_vector
       
       -- flags
-      flags(3) := c_result(7);
+      flags(3) := temp(7);
       -- N(negative): MSB is the sign bit which signifies + or -
-      flags(2) := '1' when c_result = 0 else '0';
+      -- can't compare c_result to 0 because it's signed
+      if temp(7 downto 0) = to_signed(0, 8) then
+        flags(2) := '1';
+      else
+        flags(2) := '0';
+      end if;
       -- Z(zero): if result is 0, then Z is 1
       if i_op = "000" then
         flags(1) := temp(8);
@@ -98,10 +103,22 @@ begin
           flags(1) := '0';
       -- don't use the carry
       end if; 
-      if i_op = "000" or i_op = "001" then
-      -- arithmetic (add or sub)
-      flags(0) := (c_A(8) = c_B(8)) and (temp(8) /= a_s(8));
+      
+      if i_op = "000" then
       -- overflow happens when inputs have the same sign but the result has a different sign
+        if (c_A(7) = c_B(7)) and (temp(7) /= c_A(7)) then
+            flags(0) := '1';
+        else
+            flags(0) := '0';
+        end if;
+      -- 7 is the signed MSB
+      elsif i_op = "001" then
+        if (c_A(7) /= c_B(7)) and (temp(7) /= c_A(7)) then
+            flags(0) := '1';
+        else
+            flags(0) := '0';
+        end if;
+      
       else
           flags(0) := '0';
       end if;

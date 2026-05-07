@@ -23,6 +23,7 @@
 library ieee;
   use ieee.std_logic_1164.all;
   use ieee.numeric_std.all;
+  use IEEE.NUMERIC_STD.ALL;
 
 
 entity top_basys3 is
@@ -32,6 +33,7 @@ entity top_basys3 is
         sw      :   in std_logic_vector(7 downto 0); -- operands and opcode
         btnU    :   in std_logic; -- reset
         btnC    :   in std_logic; -- fsm cycle
+        btnL : in std_logic;
         
         -- outputs
         led :   out std_logic_vector(15 downto 0);
@@ -49,15 +51,16 @@ architecture top_basys3_arch of top_basys3 is
             i_B : in std_logic_vector(7 downto 0);
             i_op : in std_logic_vector(2 downto 0);
             o_result : out std_logic_vector(7 downto 0);
-            o_flags : out std_logic_vector(3 downto 0);
+            o_flags : out std_logic_vector(3 downto 0)
         );
     end component;
 
     component controller_fsm
         Port (
+            i_clk : in STD_LOGIC;
             i_reset : in STD_LOGIC;
             i_adv : in STD_LOGIC;
-            o_cycle : out STD_LOGIC_VECTOR (3 downto 0));
+            o_cycle : out STD_LOGIC_VECTOR (3 downto 0)
         );
     end component;
     
@@ -95,7 +98,7 @@ begin
         port map (
             i_clk => clk,
             -- connects input to clock
-            i_reset => btnU,
+            i_reset => btnL,
             -- makes btnU the reset
             o_clk => slow_clk
             -- slows down everything
@@ -103,6 +106,7 @@ begin
     
     fsm: controller_fsm
         port map (
+            i_clk => clk,
             i_reset => btnU,
             i_adv => btnC,
             o_cycle => w_cycle
@@ -155,7 +159,7 @@ begin
             sign <= '0';
         end if;
         
-        hund <= (others => '0');
+        hundred <= (others => '0');
         tens <= std_logic_vector(unsigned(w_result) / 10);
         ones <= std_logic_vector(unsigned(w_result) mod 10);
     end process;
