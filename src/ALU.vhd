@@ -47,85 +47,59 @@ entity ALU is
 end ALU;
 
 architecture Behavioral of ALU is
-    signal c_A : signed(8 downto 0);
-    signal c_B : signed(8 downto 0);
-    signal temp_result : signed(8 downto 0);
+    component adder is
+        Port ( i_a : in STD_LOGIC_VECTOR (7 downto 0);
+               i_b : in STD_LOGIC_VECTOR (7 downto 0);
+               c_in : in STD_LOGIC;
+               sum : out STD_LOGIC_VECTOR (7 downto 0);
+               c_out : out STD_LOGIC);
+    end component adder;
+    
+    signal b_signal : std_logic_vector(7 downto 0);
+    signal op_signal : std_logic;
+    signal sum_signal : std_logic_vector(7 downto 0);
+    signal out_signal : std_logic;
+    signal result : std_logic_vector(7 downto 0);
+    signal negative : std_logic;
+    signal zero : std_logic;
+    signal carry : std_logic;
+    signal overflow : std_logic;
 
 begin
     
-    c_A <= resize(signed(i_A), 9);
-    c_B <= resize(signed(i_B), 9);
--- resize(c_A, 9) makes A a 9-bit so we don't lose the carry
-    -- run this whenevr A, B, or opcode changes
-    process(c_A, c_B, i_op)
-    variable temp : signed(8 downto 0);
-    -- temp holds result before final output
-    variable flags : std_logic_vector(3 downto 0);
-    -- flags
-    begin
-    temp := (others => '0');
-    flags := (others => '0');
-    -- reset everything at start of operation
-        case i_op is
-            when "000" => -- ADD
-                temp := c_A + c_B;
-            when "001" => -- SUBTRACT
-                temp := c_A - c_B;
-            when "010" => -- AND
-                temp(7 downto 0) := c_A(7 downto 0) and c_B(7 downto 0);
-            when "011" => -- OR
-                temp(7 downto 0) := c_A(7 downto 0) or c_B(7 downto 0);
-            when others => -- RESET
-                temp := (others => '0');
-        end case;
-      o_result <= std_logic_vector(temp(7 downto 0));
-      -- takes lower 8 bits of result and converts it to std_logic_vector
-      
-      -- flags
-      flags(3) := temp(7);
-      -- N(negative): MSB is the sign bit which signifies + or -
-      -- can't compare c_result to 0 because it's signed
-      if temp(7 downto 0) = to_signed(0, 8) then
-        flags(2) := '1';
-      else
-        flags(2) := '0';
-      end if;
-      -- Z(zero): if result is 0, then Z is 1
-      if i_op = "000" then
-        flags(1) := temp(8);
-      -- C(carry): addition, bit 8 is the carry out
-      elsif i_op = "001" then
-        flags(1) := temp(8);
-      -- C(carry): subtraction, bit 8 is the borrow
-      else
-          flags(1) := '0';
-      -- don't use the carry
-      end if; 
-      
-      if i_op = "000" then
-      -- overflow happens when inputs have the same sign but the result has a different sign
-        if (c_A(7) = c_B(7)) and (temp(7) /= c_A(7)) then
-            flags(0) := '1';
-        else
-            flags(0) := '0';
-        end if;
-      -- 7 is the signed MSB
-      elsif i_op = "001" then
-        if (c_A(7) /= c_B(7)) and (temp(7) /= c_A(7)) then
-            flags(0) := '1';
-        else
-            flags(0) := '0';
-        end if;
-      
-      else
-          flags(0) := '0';
-      end if;
-      -- no overflow for logic ops (and or)
-      
-      o_flags <= flags;
-      -- gets flags to output flags
-     end process;
-     
+
+    adder_inst: adder port map (
+            i_a => i_A,
+            i_b => b_signal,
+            c_in => op_signal,
+            sum => sum_signal,
+            c_out => out_signal
+        );
+    
+    op_signal <= '0' when (i_op = "000") else
+            '1' when (i_op = "001") else
+            '0';
+            
+    b_signal <= not(i_b) when (i_op = "001") else
+            i_b;
+           
+    result <= sum_signal when ((i_op = "000") or (i_op = "001")) else
+            (i_a and i_b) when (i_op = "010") else
+            (i_a or i_b) when (i_op = "011");
+            
+    negative <= '1' when (result(7) = '1') else '0';
+    
+    zero <= '1' when (result = "00000000") else '0';
+        
+    carry <= out_signal when ((i_op = "000") or (i_op = "001")) else '0';
+    
+    overflow <= (i_A(7) xor sum_signal(7)) and not(i_A(7) xor  b_signal(7))
+        when ((i_op = "000") or (i_op = "001")) else
+        '0';
+    
+    o_result <= result;
+    
+    o_flags <= negative & zero & carry & overflow;
 
 
 end Behavioral;

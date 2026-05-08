@@ -65,26 +65,12 @@ signal adv_pulse : std_logic := '0';
 begin
 process(i_clk)
 begin
-    if rising_edge(i_clk) then
-    -- once the clock ticks
-        adv_prev <= adv_curr;
-        -- stores the previous value of the button
-        adv_curr <= i_adv;
-        -- reads the button press and stores it in a register
-        -- in order to not have multiple clock cycles change when we press the button, we use the previous to track if the button has been pressed before
-        adv_pulse <= adv_curr and (not adv_prev);
-        -- if the button is currently pressed AND it hasn't been held down
-    end if;
-end process;
-
-process(i_clk)
-begin
 -- runs when clock ticks
     if rising_edge(i_clk) then
     
         if i_reset = '1' then
             state <= S0;
-        elsif adv_pulse = '1' then
+        elsif i_adv = '1' then
             case state is
                 when S0 => state <= S1;
                 when S1 => state <= S2;

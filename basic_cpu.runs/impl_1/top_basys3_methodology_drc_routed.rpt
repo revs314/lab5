@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Wed May  6 22:59:53 2026
+| Date         : Fri May  8 16:21:37 2026
 | Host         : C28-2TK41601DB running 64-bit major release  (build 9200)
 | Command      : report_methodology -file top_basys3_methodology_drc_routed.rpt -pb top_basys3_methodology_drc_routed.pb -rpx top_basys3_methodology_drc_routed.rpx
 | Design       : top_basys3
@@ -23,13 +23,15 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 36
-+-----------+------------------+-------------------------------+--------+
-| Rule      | Severity         | Description                   | Checks |
-+-----------+------------------+-------------------------------+--------+
-| TIMING-17 | Critical Warning | Non-clocked sequential cell   | 2      |
-| TIMING-18 | Warning          | Missing input or output delay | 34     |
-+-----------+------------------+-------------------------------+--------+
+             Checks found: 45
++-----------+------------------+--------------------------------+--------+
+| Rule      | Severity         | Description                    | Checks |
++-----------+------------------+--------------------------------+--------+
+| TIMING-17 | Critical Warning | Non-clocked sequential cell    | 2      |
+| TIMING-18 | Warning          | Missing input or output delay  | 34     |
+| TIMING-20 | Warning          | Non-clocked latch              | 8      |
+| LATCH-1   | Advisory         | Existing latches in the design | 1      |
++-----------+------------------+--------------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
@@ -211,6 +213,51 @@ Related violations: <none>
 TIMING-18#34 Warning
 Missing input or output delay  
 An output delay is missing on seg[6] relative to the rising and/or falling clock edge(s) of sys_clk_pin.
+Related violations: <none>
+
+TIMING-20#1 Warning
+Non-clocked latch  
+The latch alu1/result_reg[0] cannot be properly analyzed as its control pin alu1/result_reg[0]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#2 Warning
+Non-clocked latch  
+The latch alu1/result_reg[1] cannot be properly analyzed as its control pin alu1/result_reg[1]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#3 Warning
+Non-clocked latch  
+The latch alu1/result_reg[2] cannot be properly analyzed as its control pin alu1/result_reg[2]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#4 Warning
+Non-clocked latch  
+The latch alu1/result_reg[3] cannot be properly analyzed as its control pin alu1/result_reg[3]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#5 Warning
+Non-clocked latch  
+The latch alu1/result_reg[4] cannot be properly analyzed as its control pin alu1/result_reg[4]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#6 Warning
+Non-clocked latch  
+The latch alu1/result_reg[5] cannot be properly analyzed as its control pin alu1/result_reg[5]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#7 Warning
+Non-clocked latch  
+The latch alu1/result_reg[6] cannot be properly analyzed as its control pin alu1/result_reg[6]/G is not reached by a timing clock
+Related violations: <none>
+
+TIMING-20#8 Warning
+Non-clocked latch  
+The latch alu1/result_reg[7] cannot be properly analyzed as its control pin alu1/result_reg[7]/G is not reached by a timing clock
+Related violations: <none>
+
+LATCH-1#1 Advisory
+Existing latches in the design  
+There are 8 latches found in the design. Inferred latches are often the result of HDL coding mistakes, such as incomplete if or case statements.
 Related violations: <none>
 
 

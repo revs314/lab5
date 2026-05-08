@@ -23,7 +23,6 @@
 library ieee;
   use ieee.std_logic_1164.all;
   use ieee.numeric_std.all;
-  use IEEE.NUMERIC_STD.ALL;
 
 
 entity top_basys3 is
@@ -105,7 +104,6 @@ architecture top_basys3_arch of top_basys3 is
         );
     end component;
     
-    signal c_A, c_B : std_logic_vector(7 downto 0) := (others => '0');
     signal w_cycle : std_logic_vector(3 downto 0);
     -- FSM output
     signal w_result : std_logic_vector(7 downto 0);
@@ -126,10 +124,11 @@ architecture top_basys3_arch of top_basys3 is
     signal seg_data : std_logic_vector(6 downto 0);
     signal an_data : std_logic_vector(3 downto 0);
     signal op_latched : std_logic_vector(2 downto 0) := "000";
-    signal result_latched : std_logic_vector(7 downto 0);
+    signal result_latched : std_logic_vector(7 downto 0) := (others => '0');
     signal btnC_sync, btnC_prev : std_logic := '0';
     signal btnC_pulse : std_logic;
-    signal A_latched, B_latched : std_logic_vector(7 downto 0);
+    signal A_latched, B_latched : std_logic_vector(7 downto 0) := (others => '0');
+    signal display_value : std_logic_vector(7 downto 0);
 
 begin
 	-- PORT MAPS ----------------------------------------
@@ -153,6 +152,10 @@ begin
     
     btnC_pulse <= btnC_sync and (not btnC_prev);
     
+    -- button_debounce
+    -- 2 registers (A and B)
+    -- 
+    
     fsm: controller_fsm
         port map (
             i_clk => clk,
@@ -168,44 +171,65 @@ begin
         port map (
             i_A => A_latched,
             i_B => B_latched,
-            i_op => sw(2 downto 0),
+            i_op => op_latched,
             -- lower 3 switches are the opcode
             o_result => w_result,
             o_flags => w_flags
         );
         
-    process(clk)
+process(clk)
     begin
         if rising_edge(clk) then
             if btnU = '1' then
-                c_A <= (others => '0');
-                c_B <= (others => '0');
+                A_latched <= (others => '0');
+                B_latched <= (others => '0');
                 result_latched <= (others => '0');
-            else
+                op_latched <= (others => '0');
+            elsif btnC_pulse = '1' then
                 case w_cycle is
                     when "0010" =>
-                        c_A <= sw;
                         A_latched <= sw;
+                        -- w_cycle <= "0100";
                         -- load A
                     when "0100" =>
-                        c_B <= sw;
                         B_latched <= sw;
-                        
+                        op_latched <= sw(2 downto 0); -- the lower 3 bits become the opcode
+                        -- w_cycle <= "1000";
                         -- load B
                     when "1000" =>
                         result_latched <= w_result;
-                        
+                        -- w_cycle <= "0010";
                     when others =>
                         null;
                 end case;
                 
             end if;
         end if;
-    end process;
+end process;
+
+-- display
+process(w_cycle, A_latched, B_latched, result_latched)
+begin
+    case w_cycle is -- if the 
+        when "0010" =>
+            display_value <= A_latched;
+            -- displays A
+        when "0100" =>
+            display_value <= B_latched;
+            -- displays B
+        when "1000" =>
+            display_value <= result_latched;
+            -- displays result
+            
+        when others =>
+            display_value <= (others => '0'); 
+    end case;
+end process;
+
         
     decimal_conversion: twos_comp
     port map(
-        i_bin => result_latched,
+        i_bin => display_value,
         o_sign => sign,
         o_hund => hundred,
         o_tens => tens,
@@ -253,7 +277,7 @@ begin
 	
 	
 	-- CONCURRENT STATEMENTS ----------------------------
-	
+	-- display respective number for respective cycle
 	
 	
 end top_basys3_arch;

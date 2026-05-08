@@ -8,12 +8,12 @@
   **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
   **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
   **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Wed May  6 22:57:09 2026
+  **** Start of session at: Fri May  8 16:18:19 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source top_basys3.tcl -notrace
-create_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:07 . Memory (MB): peak = 524.309 ; gain = 217.625
+create_project: Time (s): cpu = 00:00:04 ; elapsed = 00:00:09 . Memory (MB): peak = 526.129 ; gain = 220.348
 Command: read_checkpoint -auto_incremental -incremental C:/Users/C28Reva.Kalbhor/ece281/lab5/basic_cpu.srcs/utils_1/imports/synth_1/top_basys3.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/C28Reva.Kalbhor/ece281/lab5/basic_cpu.srcs/utils_1/imports/synth_1/top_basys3.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -26,36 +26,37 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 29532
+INFO: [Synth 8-7075] Helper process launched with PID 21624
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 1265.660 ; gain = 543.547
+Starting RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:12 . Memory (MB): peak = 1264.207 ; gain = 541.680
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'top_basys3' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:47]
-INFO: [Synth 8-3491] module 'clock_divider' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/clock_divider.vhd:53' bound to instance 'clkdiv' of component 'clock_divider' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:136]
+INFO: [Synth 8-638] synthesizing module 'top_basys3' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:46]
+INFO: [Synth 8-3491] module 'clock_divider' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/clock_divider.vhd:53' bound to instance 'clkdiv' of component 'clock_divider' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:135]
 INFO: [Synth 8-638] synthesizing module 'clock_divider' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/clock_divider.vhd:63]
 	Parameter k_DIV bound to: 100000 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'clock_divider' (0#1) [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/clock_divider.vhd:63]
-INFO: [Synth 8-3491] module 'controller_fsm' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/controller_fsm.vhd:34' bound to instance 'fsm' of component 'controller_fsm' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:156]
+INFO: [Synth 8-3491] module 'controller_fsm' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/controller_fsm.vhd:34' bound to instance 'fsm' of component 'controller_fsm' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:159]
 INFO: [Synth 8-638] synthesizing module 'controller_fsm' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/controller_fsm.vhd:45]
 INFO: [Synth 8-256] done synthesizing module 'controller_fsm' (0#1) [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/controller_fsm.vhd:45]
-INFO: [Synth 8-3491] module 'ALU' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/ALU.vhd:41' bound to instance 'alu1' of component 'ALU' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:167]
+INFO: [Synth 8-3491] module 'ALU' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/ALU.vhd:41' bound to instance 'alu1' of component 'ALU' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:170]
 INFO: [Synth 8-638] synthesizing module 'ALU' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/ALU.vhd:49]
+INFO: [Synth 8-3491] module 'adder' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/adder.vhd:35' bound to instance 'adder_inst' of component 'adder' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/ALU.vhd:71]
+INFO: [Synth 8-638] synthesizing module 'adder' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/adder.vhd:43]
+INFO: [Synth 8-256] done synthesizing module 'adder' (0#1) [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/adder.vhd:43]
 INFO: [Synth 8-256] done synthesizing module 'ALU' (0#1) [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/ALU.vhd:49]
-INFO: [Synth 8-3491] module 'twos_comp' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/twoscomp_decimal.vhd:11' bound to instance 'decimal_conversion' of component 'twos_comp' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:206]
+INFO: [Synth 8-3491] module 'twos_comp' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/twoscomp_decimal.vhd:11' bound to instance 'decimal_conversion' of component 'twos_comp' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:230]
 INFO: [Synth 8-638] synthesizing module 'twos_comp' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/twoscomp_decimal.vhd:21]
 INFO: [Synth 8-256] done synthesizing module 'twos_comp' (0#1) [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/twoscomp_decimal.vhd:21]
 	Parameter k_WIDTH bound to: 4 - type: integer 
-INFO: [Synth 8-3491] module 'TDM4' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/TDM4.vhd:56' bound to instance 'display' of component 'TDM4' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:215]
+INFO: [Synth 8-3491] module 'TDM4' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab5/src/TDM4.vhd:56' bound to instance 'display' of component 'TDM4' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:239]
 INFO: [Synth 8-638] synthesizing module 'TDM4' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/TDM4.vhd:69]
 	Parameter k_WIDTH bound to: 4 - type: integer 
 INFO: [Synth 8-256] done synthesizing module 'TDM4' (0#1) [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/TDM4.vhd:69]
-INFO: [Synth 8-3491] module 'sevenseg_decoder' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab2/src/sevenseg_decoder.vhd:34' bound to instance 'decoder' of component 'sevenseg_decoder' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:228]
+INFO: [Synth 8-3491] module 'sevenseg_decoder' declared at 'C:/Users/C28Reva.Kalbhor/ece281/lab2/src/sevenseg_decoder.vhd:34' bound to instance 'decoder' of component 'sevenseg_decoder' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:252]
 INFO: [Synth 8-638] synthesizing module 'sevenseg_decoder' [C:/Users/C28Reva.Kalbhor/ece281/lab2/src/sevenseg_decoder.vhd:39]
 INFO: [Synth 8-226] default block is never used [C:/Users/C28Reva.Kalbhor/ece281/lab2/src/sevenseg_decoder.vhd:41]
 INFO: [Synth 8-256] done synthesizing module 'sevenseg_decoder' (0#1) [C:/Users/C28Reva.Kalbhor/ece281/lab2/src/sevenseg_decoder.vhd:39]
-INFO: [Synth 8-256] done synthesizing module 'top_basys3' (0#1) [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:47]
-WARNING: [Synth 8-6014] Unused sequential element c_A_reg was removed.  [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:181]
-WARNING: [Synth 8-6014] Unused sequential element c_B_reg was removed.  [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:182]
+INFO: [Synth 8-256] done synthesizing module 'top_basys3' (0#1) [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/top_basys3.vhd:46]
 WARNING: [Synth 8-3917] design top_basys3 has port led[11] driven by constant 0
 WARNING: [Synth 8-3917] design top_basys3 has port led[10] driven by constant 0
 WARNING: [Synth 8-3917] design top_basys3 has port led[9] driven by constant 0
@@ -65,18 +66,18 @@ WARNING: [Synth 8-3917] design top_basys3 has port led[6] driven by constant 0
 WARNING: [Synth 8-3917] design top_basys3 has port led[5] driven by constant 0
 WARNING: [Synth 8-3917] design top_basys3 has port led[4] driven by constant 0
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 1384.055 ; gain = 661.941
+Finished RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:16 . Memory (MB): peak = 1384.293 ; gain = 661.766
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 1384.055 ; gain = 661.941
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:10 ; elapsed = 00:00:16 . Memory (MB): peak = 1384.293 ; gain = 661.766
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 1384.055 ; gain = 661.941
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:16 . Memory (MB): peak = 1384.293 ; gain = 661.766
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1384.055 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1384.293 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -87,28 +88,28 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/top_basys3_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1461.879 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1436.602 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1461.879 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1436.602 ; gain = 0.000
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1461.879 ; gain = 739.766
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:31 . Memory (MB): peak = 1436.602 ; gain = 714.074
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1461.879 ; gain = 739.766
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:31 . Memory (MB): peak = 1436.602 ; gain = 714.074
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1461.879 ; gain = 739.766
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:31 . Memory (MB): peak = 1436.602 ; gain = 714.074
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'controller_fsm'
 ---------------------------------------------------------------------------------------------------
@@ -120,8 +121,9 @@ INFO: [Synth 8-802] inferred FSM for state register 'state_reg' in module 'contr
                       s3 |                             1000 |                               11
 ---------------------------------------------------------------------------------------------------
 INFO: [Synth 8-3354] encoded FSM with state register 'state_reg' using encoding 'one-hot' in module 'controller_fsm'
+WARNING: [Synth 8-327] inferring latch for variable 'result_reg' [C:/Users/C28Reva.Kalbhor/ece281/lab5/src/ALU.vhd:86]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1461.879 ; gain = 739.766
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:21 ; elapsed = 00:00:32 . Memory (MB): peak = 1436.602 ; gain = 714.074
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -131,26 +133,26 @@ Detailed RTL Component Info :
 	   2 Input   32 Bit       Adders := 1     
 	   2 Input   31 Bit       Adders := 2     
 	   3 Input    9 Bit       Adders := 1     
-	   2 Input    9 Bit       Adders := 1     
 	   2 Input    8 Bit       Adders := 1     
 	   2 Input    4 Bit       Adders := 1     
 	   2 Input    2 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 2     
 +---Registers : 
 	               31 Bit    Registers := 1     
 	                8 Bit    Registers := 3     
+	                3 Bit    Registers := 1     
 	                2 Bit    Registers := 1     
-	                1 Bit    Registers := 6     
+	                1 Bit    Registers := 3     
 +---Muxes : 
 	   2 Input   32 Bit        Muxes := 1     
 	   2 Input   31 Bit        Muxes := 1     
-	   4 Input    9 Bit        Muxes := 1     
-	   2 Input    9 Bit        Muxes := 1     
-	   2 Input    8 Bit        Muxes := 1     
+	   2 Input    8 Bit        Muxes := 4     
 	   2 Input    7 Bit        Muxes := 1     
 	   4 Input    4 Bit        Muxes := 3     
 	   2 Input    4 Bit        Muxes := 1     
-	   2 Input    1 Bit        Muxes := 4     
-	   4 Input    1 Bit        Muxes := 3     
+	   4 Input    1 Bit        Muxes := 4     
+	   2 Input    1 Bit        Muxes := 2     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -175,25 +177,25 @@ WARNING: [Synth 8-3917] design top_basys3 has port led[6] driven by constant 0
 WARNING: [Synth 8-3917] design top_basys3 has port led[5] driven by constant 0
 WARNING: [Synth 8-3917] design top_basys3 has port led[4] driven by constant 0
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:26 . Memory (MB): peak = 1517.543 ; gain = 795.430
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:29 ; elapsed = 00:00:43 . Memory (MB): peak = 1521.945 ; gain = 799.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:26 ; elapsed = 00:00:32 . Memory (MB): peak = 1583.820 ; gain = 861.707
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:00:53 . Memory (MB): peak = 1594.270 ; gain = 871.742
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:32 . Memory (MB): peak = 1614.406 ; gain = 892.293
+Finished Timing Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:53 . Memory (MB): peak = 1616.059 ; gain = 893.531
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:27 ; elapsed = 00:00:32 . Memory (MB): peak = 1614.406 ; gain = 892.293
+Finished Technology Mapping : Time (s): cpu = 00:00:36 ; elapsed = 00:00:54 . Memory (MB): peak = 1616.059 ; gain = 893.531
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -211,37 +213,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:32 ; elapsed = 00:00:37 . Memory (MB): peak = 1843.578 ; gain = 1121.465
+Finished IO Insertion : Time (s): cpu = 00:00:42 ; elapsed = 00:01:02 . Memory (MB): peak = 1854.539 ; gain = 1132.012
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:32 ; elapsed = 00:00:37 . Memory (MB): peak = 1843.578 ; gain = 1121.465
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:42 ; elapsed = 00:01:02 . Memory (MB): peak = 1854.539 ; gain = 1132.012
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:32 ; elapsed = 00:00:38 . Memory (MB): peak = 1843.578 ; gain = 1121.465
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:42 ; elapsed = 00:01:02 . Memory (MB): peak = 1854.539 ; gain = 1132.012
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:32 ; elapsed = 00:00:38 . Memory (MB): peak = 1843.578 ; gain = 1121.465
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:42 ; elapsed = 00:01:02 . Memory (MB): peak = 1854.539 ; gain = 1132.012
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:32 ; elapsed = 00:00:38 . Memory (MB): peak = 1843.578 ; gain = 1121.465
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:42 ; elapsed = 00:01:02 . Memory (MB): peak = 1854.539 ; gain = 1132.012
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:32 ; elapsed = 00:00:38 . Memory (MB): peak = 1843.578 ; gain = 1121.465
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:42 ; elapsed = 00:01:02 . Memory (MB): peak = 1854.539 ; gain = 1132.012
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -258,41 +260,43 @@ Report Cell Usage:
 |      |Cell   |Count |
 +------+-------+------+
 |1     |BUFG   |     1|
-|2     |CARRY4 |    79|
-|3     |LUT1   |    23|
-|4     |LUT2   |   127|
-|5     |LUT3   |    93|
+|2     |CARRY4 |    76|
+|3     |LUT1   |    46|
+|4     |LUT2   |   138|
+|5     |LUT3   |    88|
 |6     |LUT4   |    83|
-|7     |LUT5   |    72|
-|8     |LUT6   |    93|
+|7     |LUT5   |    79|
+|8     |LUT6   |    65|
 |9     |FDCE   |    34|
-|10    |FDRE   |    32|
+|10    |FDRE   |    29|
 |11    |FDSE   |     1|
-|12    |IBUF   |    12|
-|13    |OBUF   |    27|
+|12    |LD     |     8|
+|13    |IBUF   |    12|
+|14    |OBUF   |    27|
 +------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:32 ; elapsed = 00:00:38 . Memory (MB): peak = 1843.578 ; gain = 1121.465
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:42 ; elapsed = 00:01:02 . Memory (MB): peak = 1854.539 ; gain = 1132.012
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 8 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 1843.578 ; gain = 1043.641
-Synthesis Optimization Complete : Time (s): cpu = 00:00:32 ; elapsed = 00:00:38 . Memory (MB): peak = 1843.578 ; gain = 1121.465
+Synthesis finished with 0 errors, 0 critical warnings and 9 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:30 ; elapsed = 00:00:59 . Memory (MB): peak = 1854.539 ; gain = 1079.703
+Synthesis Optimization Complete : Time (s): cpu = 00:00:42 ; elapsed = 00:01:03 . Memory (MB): peak = 1854.539 ; gain = 1132.012
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1852.770 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 79 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 1863.676 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 84 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
-INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1856.457 ; gain = 0.000
+INFO: [Opt 31-138] Pushed 1 inverter(s) to 8 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1867.395 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
+  A total of 8 instances were transformed.
+  LD => LDCE (inverted pins: G): 8 instances
 
-Synth Design complete | Checksum: c5292c28
+Synth Design complete | Checksum: 93c661a8
 INFO: [Common 17-83] Releasing license: Synthesis
-44 Infos, 18 Warnings, 0 Critical Warnings and 0 Errors encountered.
+47 Infos, 17 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:37 ; elapsed = 00:00:45 . Memory (MB): peak = 1856.457 ; gain = 1321.703
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1856.457 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:46 ; elapsed = 00:01:14 . Memory (MB): peak = 1867.395 ; gain = 1331.934
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 1867.395 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/C28Reva.Kalbhor/ece281/lab5/basic_cpu.runs/synth_1/top_basys3.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file top_basys3_utilization_synth.rpt -pb top_basys3_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed May  6 22:58:06 2026...
+INFO: [Common 17-206] Exiting Vivado at Fri May  8 16:19:48 2026...

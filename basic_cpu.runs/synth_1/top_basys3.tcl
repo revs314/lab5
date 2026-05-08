@@ -78,6 +78,7 @@ OPTRACE "Adding files" START { }
 read_vhdl -library xil_defaultlib {
   C:/Users/C28Reva.Kalbhor/ece281/lab5/src/ALU.vhd
   C:/Users/C28Reva.Kalbhor/ece281/lab5/src/TDM4.vhd
+  C:/Users/C28Reva.Kalbhor/ece281/lab5/src/adder.vhd
   C:/Users/C28Reva.Kalbhor/ece281/lab5/src/clock_divider.vhd
   C:/Users/C28Reva.Kalbhor/ece281/lab5/src/controller_fsm.vhd
   C:/Users/C28Reva.Kalbhor/ece281/lab2/src/sevenseg_decoder.vhd
